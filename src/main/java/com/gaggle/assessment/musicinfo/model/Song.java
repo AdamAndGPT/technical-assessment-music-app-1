@@ -13,7 +13,7 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
     private String isrc;
     private String title;
     private String artist;
