@@ -3,7 +3,7 @@ package com.gaggle.assessment.musicinfo.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,5 +17,6 @@ public class Song {
     private String isrc;
     private String title;
     private String artist;
-    private List<Musician> musicianList;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Set<Musician> musicianList;
 }
