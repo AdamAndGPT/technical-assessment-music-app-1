@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gaggle.assessment.musicinfo.data.DataInitializer;
 import com.gaggle.assessment.musicinfo.model.entities.Musician;
 import com.gaggle.assessment.musicinfo.model.entities.Song;
-import com.gaggle.assessment.musicinfo.model.response.Musicians;
+import com.gaggle.assessment.musicinfo.model.response.MusicianResponse;
+import com.gaggle.assessment.musicinfo.model.response.SongResponse;
 import com.gaggle.assessment.musicinfo.repository.SongRepository;
-import org.assertj.core.util.Sets;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,10 +73,10 @@ class MockMvcTests {
         Song song = new Song(null, "123456", "Test", "Dave", new HashSet<>(Arrays.asList(musician)));
         ResponseEntity<String> musicianResponse = restTemplate.postForEntity("/musicians", musician, String.class);
         Assert.assertEquals(HttpStatus.CREATED, musicianResponse.getStatusCode());
-        Musicians musicians = objectMapper.readValue(musicianResponse.getBody(), Musicians.class);
+        MusicianResponse musicians = objectMapper.readValue(musicianResponse.getBody(), MusicianResponse.class);
         musicians.toString();
+        ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", song, String.class);
+        SongResponse songs = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
     }
-
-
 
 }

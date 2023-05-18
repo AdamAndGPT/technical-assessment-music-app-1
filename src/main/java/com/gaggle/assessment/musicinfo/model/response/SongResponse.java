@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Musicians {
-    private Integer id;
-    private String name;
-    private String contribution;
+public class SongResponse {
+    private String isrc;
+    private String title;
+    private String artist;
     private Links _links;
 
     @Data
@@ -18,7 +18,8 @@ public class Musicians {
     @AllArgsConstructor
     public static class Links {
         private Link self;
-        private Link musician;
+        private Link song;
+        private Link musicianList;
 
         @Data
         @NoArgsConstructor
