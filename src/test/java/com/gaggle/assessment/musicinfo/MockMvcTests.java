@@ -1,10 +1,9 @@
 package com.gaggle.assessment.musicinfo;
 
 import com.gaggle.assessment.musicinfo.data.DataInitializer;
-import com.gaggle.assessment.musicinfo.model.Song;
+import com.gaggle.assessment.musicinfo.model.entities.Song;
 import com.gaggle.assessment.musicinfo.repository.SongRepository;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.stream.Stream;
 
@@ -42,8 +40,20 @@ class MockMvcTests {
     }
 
     @Test
-    public void getAllSongs(){
+    void getAllSongs(){
         ResponseEntity<String> response = restTemplate.getForEntity("/songs", String.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    void getAllMusicians(){
+        ResponseEntity<String> response = restTemplate.getForEntity("/musicians", String.class);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void postMusicians() {
+
+    }
+
 }

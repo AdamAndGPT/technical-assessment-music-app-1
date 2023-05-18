@@ -1,4 +1,4 @@
-package com.gaggle.assessment.musicinfo.model;
+package com.gaggle.assessment.musicinfo.model.entities;
 
 import lombok.*;
 
