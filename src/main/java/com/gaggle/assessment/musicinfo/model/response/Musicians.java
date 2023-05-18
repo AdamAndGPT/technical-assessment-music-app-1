@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Musicians {
+    private Integer id;
     private String name;
     private String contribution;
     private Links _links;
