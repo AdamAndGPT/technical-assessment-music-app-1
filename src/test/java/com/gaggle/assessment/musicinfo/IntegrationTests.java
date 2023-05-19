@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gaggle.assessment.musicinfo.data.DataInitializer;
 import com.gaggle.assessment.musicinfo.model.entities.Musician;
 import com.gaggle.assessment.musicinfo.model.entities.Song;
+import com.gaggle.assessment.musicinfo.model.request.SongPostRequest;
 import com.gaggle.assessment.musicinfo.model.response.MusicianResponse;
 import com.gaggle.assessment.musicinfo.model.response.SongResponse;
 import com.gaggle.assessment.musicinfo.repository.SongRepository;
@@ -21,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
@@ -29,7 +29,7 @@ import java.util.stream.Stream;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = MusicInfoApplication.class)
 @AutoConfigureMockMvc
-class MockMvcTests {
+class IntegrationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -70,13 +70,18 @@ class MockMvcTests {
     @Test
     void postSongWithContributor() throws JsonProcessingException {
         Musician musician = new Musician(null, "Dave", "Singer");
-        Song song = new Song(null, "123456", "Test", "Dave", new HashSet<>(Arrays.asList(musician)));
+
         ResponseEntity<String> musicianResponse = restTemplate.postForEntity("/musicians", musician, String.class);
         Assert.assertEquals(HttpStatus.CREATED, musicianResponse.getStatusCode());
         MusicianResponse musicians = objectMapper.readValue(musicianResponse.getBody(), MusicianResponse.class);
-        musicians.toString();
-        ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", song, String.class);
+
+        SongPostRequest songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
+                Arrays.asList(musicians.get_links().getMusician().getHref()));
+        ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", songPostRequest, String.class);
         SongResponse songs = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
+        Assert.assertEquals(HttpStatus.CREATED, songResponse.getStatusCode());
+        Assert.assertEquals("The Dave", songs.getArtist());
+//        Assert.assertEquals(musicians.get_links().getMusician().getHref(), songs.get_links().getMusicianList().getHref());
     }
 
 }
