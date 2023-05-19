@@ -41,6 +41,8 @@ This repository makes use of `Spring Data Rest` and `SpringDoc OpenApi` to quick
 document Rest APIs whose purpose is to access database resources. For the purposes of this assessment we will be using
 an in-memory H2 database in order to persist our database entities.
 
+In order to start the app run `gradle clean build bootRun` from the project root
+
 Please access the below URL for access to the swagger-ui in order to try out each
 endpoint provided by `Spring Data Rest`.
 
