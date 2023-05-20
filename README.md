@@ -52,6 +52,10 @@ In order to start the app via `docker` use, from the root of the project, the fo
 2. `docker build -t my-application .`
 3. `docker run -p 8080:8080 my-application`
 
+Both deployment options will start the application on `localhost:8080`
+
+## API Documentation (swagger) 
+
 Please access the below URL for access to the swagger-ui in order to try out each
 endpoint provided by `Spring Data Rest`.
 
