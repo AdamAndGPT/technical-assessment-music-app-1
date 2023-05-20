@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SongResponse {
+    private Integer id;
     private String isrc;
     private String title;
     private String artist;

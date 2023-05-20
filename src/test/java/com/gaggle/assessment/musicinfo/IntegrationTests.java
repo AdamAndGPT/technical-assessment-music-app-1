@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
@@ -78,10 +79,11 @@ class IntegrationTests {
         SongPostRequest songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
                 Arrays.asList(musicians.get_links().getMusician().getHref()));
         ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", songPostRequest, String.class);
-        SongResponse songs = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
+        SongResponse songResponsePojo = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
         Assert.assertEquals(HttpStatus.CREATED, songResponse.getStatusCode());
-        Assert.assertEquals("The Dave", songs.getArtist());
-//        Assert.assertEquals(musicians.get_links().getMusician().getHref(), songs.get_links().getMusicianList().getHref());
+        Assert.assertEquals("The Dave", songResponsePojo.getArtist());
+        Optional<Song> byId = songRepo.findById(songResponsePojo.getId());
+        Assert.assertEquals(1, byId.get().getMusicianList().size());
     }
 
 }
