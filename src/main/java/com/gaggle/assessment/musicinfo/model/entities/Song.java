@@ -19,6 +19,6 @@ public class Song {
     private String isrc;
     private String title;
     private String artist;
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private Set<Musician> musicianList;
 }
