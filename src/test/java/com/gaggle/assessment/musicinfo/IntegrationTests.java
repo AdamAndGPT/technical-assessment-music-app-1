@@ -71,10 +71,9 @@ class IntegrationTests {
     @Test
     void postSongWithContributor() throws JsonProcessingException {
         Musician musician = new Musician(null, "Dave", "Singer");
-
         ResponseEntity<String> musicianResponse = restTemplate.postForEntity("/musicians", musician, String.class);
-        Assert.assertEquals(HttpStatus.CREATED, musicianResponse.getStatusCode());
         MusicianResponse musicians = objectMapper.readValue(musicianResponse.getBody(), MusicianResponse.class);
+        Assert.assertEquals(HttpStatus.CREATED, musicianResponse.getStatusCode());
 
         SongPostRequest songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
                 Arrays.asList(musicians.get_links().getMusician().getHref()));
@@ -86,4 +85,8 @@ class IntegrationTests {
         Assert.assertEquals(1, byId.get().getMusicianList().size());
     }
 
+    @Test
+    void patchSongWithContributor() {
+
+    }
 }

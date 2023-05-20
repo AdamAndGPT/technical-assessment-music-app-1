@@ -43,6 +43,11 @@ an in-memory H2 database in order to persist our database entities.
 
 In order to start the app run `gradle clean build bootRun` from the project root
 
+In order to start the app via `docker` use
+1. `gradle clean build`
+2. `docker build -t my-application .`
+3. `docker run -p 8080:8080 my-application`
+
 Please access the below URL for access to the swagger-ui in order to try out each
 endpoint provided by `Spring Data Rest`.
 
