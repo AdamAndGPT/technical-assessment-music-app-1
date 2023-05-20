@@ -36,7 +36,7 @@ Unit tests should be created for the controller and service methods.
 2. Have the application running in a Docker container. 
 
 
-## Application Readme
+# Application Readme
 This repository makes use of `Spring Data Rest` and `SpringDoc OpenApi` to quickly and effectively create and 
 document Rest APIs whose purpose is to access database resources. For the purposes of this assessment we will be using
 an in-memory `H2` database in order to persist our database entities. 
@@ -44,6 +44,8 @@ an in-memory `H2` database in order to persist our database entities.
 ***Please Note:*** As of right now there is no service layer
 within the application, in contradiction to the assessment specifications. The controller layer has been abstracted out thanks to
 `Spring Data Rest` and the repository layer is found in the repository package. 
+
+### Deployment, starting the app
 
 In order to start the app run `gradle clean build bootRun` from the project root
 
@@ -54,7 +56,7 @@ In order to start the app via `docker` use, from the root of the project, the fo
 
 Both deployment options will start the application on `localhost:8080`
 
-## API Documentation (swagger) 
+### API Documentation (swagger) 
 
 Please access the below URL for access to the swagger-ui in order to try out each
 endpoint provided by `Spring Data Rest`.
