@@ -45,7 +45,7 @@ an in-memory `H2` database in order to persist our database entities.
 within the application, in contradiction to the assessment specifications. The controller layer has been abstracted out thanks to
 `Spring Data Rest` and the repository layer is found in the repository package. 
 
-### Deployment, starting the app
+### Deployment, Starting the App
 
 In order to start the app run `gradle clean build bootRun` from the project root
 
@@ -62,3 +62,9 @@ Please access the below URL for access to the swagger-ui in order to try out eac
 endpoint provided by `Spring Data Rest`.
 
 `http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#`
+
+### WebHook
+
+[Webhook.site](https://webhook.site/#!/78a6f62c-1aba-4368-8da8-47250718403b/f8f6ce0b-445c-404a-91db-cda97fb286a9/1) is configured
+to POST the following events to the URL defined in `application.yml`
+1. `@HandleAfterCreate` events for entity `Song.class` via repository `SongRepository.class`. 

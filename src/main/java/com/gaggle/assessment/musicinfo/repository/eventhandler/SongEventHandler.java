@@ -22,6 +22,6 @@ public class SongEventHandler {
     public void handleSongAfterCreate(Song song) {
         log.info("POSTing created song to Webhook URL: " + webhookUrl);
         ResponseEntity<String> response = restTemplate.postForEntity(webhookUrl, song, String.class);
-        log.info("Finished posting Song to Webhook URL, returned with status code: " + response.getStatusCode());
+        log.info("Finished POSTing Song to Webhook URL, returned with status code: " + response.getStatusCode());
     }
 }
