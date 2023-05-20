@@ -58,10 +58,8 @@ Both deployment options will start the application on `localhost:8080`
 
 ### API Documentation (swagger) 
 
-Please access the below URL for access to the swagger-ui in order to try out each
+Please access [this](http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#) URL for access to the swagger-ui in order to try out each
 endpoint provided by `Spring Data Rest`.
-
-`http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#`
 
 ### WebHook
 
