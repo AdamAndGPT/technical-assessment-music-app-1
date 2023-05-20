@@ -9,3 +9,7 @@ spring:
       enabled: true
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+com.gaggle.assessment.musicinfo:
+  webhook:
+    url: "https://webhook.site/78a6f62c-1aba-4368-8da8-47250718403b"
