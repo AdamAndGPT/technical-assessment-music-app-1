@@ -93,8 +93,14 @@ class IntegrationTests {
     }
 
     @Test
-    void deleteSong() {
+    void deleteSong() throws JsonProcessingException {
+        Optional<Song> byId = createSongWithContributors(1);
+        Assert.assertEquals(true, byId.isPresent());
 
+        Integer id = byId.get().getId();
+        restTemplate.delete(String.format("/songs/%d", id));
+        byId = songRepo.findById(id);
+        Assert.assertEquals(false, byId.isPresent());
     }
 
     private Optional<Song> createSongWithContributors(int numberOfMusicians) throws JsonProcessingException {
