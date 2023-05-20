@@ -83,11 +83,23 @@ class IntegrationTests {
         Assert.assertEquals(1, byId.get().getMusicianList().size());
     }
 
-
-
     @Test
-    void patchSongWithContributor() {
+    void patchSongWithContributor() throws JsonProcessingException {
+        List<String> musicianHrefs = getMusicianHrefs(1);
+        SongPostRequest songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
+                musicianHrefs);
+        ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", songPostRequest, String.class);
+        SongResponse songResponsePojo = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
+        Optional<Song> byId = songRepo.findById(songResponsePojo.getId());
+        Assert.assertEquals(1, byId.get().getMusicianList().size());
 
+        musicianHrefs = getMusicianHrefs(2);
+        songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
+                musicianHrefs);
+        songResponse = restTemplate.postForEntity("/songs", songPostRequest, String.class);
+        songResponsePojo = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
+        byId = songRepo.findById(songResponsePojo.getId());
+        Assert.assertEquals(2, byId.get().getMusicianList().size());
     }
 
     private List<String> getMusicianHrefs(int numberOfMusicians) throws JsonProcessingException {
