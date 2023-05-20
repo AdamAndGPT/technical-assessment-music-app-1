@@ -47,7 +47,7 @@ within the application, in contradiction to the assessment specifications. The c
 
 In order to start the app run `gradle clean build bootRun` from the project root
 
-In order to start the app via `docker` use from the root of the project the following commands
+In order to start the app via `docker` use, from the root of the project, the following commands
 1. `gradle clean build`
 2. `docker build -t my-application .`
 3. `docker run -p 8080:8080 my-application`
