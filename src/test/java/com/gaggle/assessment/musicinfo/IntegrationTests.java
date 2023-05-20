@@ -21,7 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -70,13 +72,9 @@ class IntegrationTests {
     }
     @Test
     void postSongWithContributor() throws JsonProcessingException {
-        Musician musician = new Musician(null, "Dave", "Singer");
-        ResponseEntity<String> musicianResponse = restTemplate.postForEntity("/musicians", musician, String.class);
-        MusicianResponse musicians = objectMapper.readValue(musicianResponse.getBody(), MusicianResponse.class);
-        Assert.assertEquals(HttpStatus.CREATED, musicianResponse.getStatusCode());
-
+        List<String> musicianHrefs = getMusicianHrefs(1);
         SongPostRequest songPostRequest = new SongPostRequest(null, "123456", "Test", "The Dave",
-                Arrays.asList(musicians.get_links().getMusician().getHref()));
+                musicianHrefs);
         ResponseEntity<String> songResponse = restTemplate.postForEntity("/songs", songPostRequest, String.class);
         SongResponse songResponsePojo = objectMapper.readValue(songResponse.getBody(), SongResponse.class);
         Assert.assertEquals(HttpStatus.CREATED, songResponse.getStatusCode());
@@ -85,8 +83,21 @@ class IntegrationTests {
         Assert.assertEquals(1, byId.get().getMusicianList().size());
     }
 
+
+
     @Test
     void patchSongWithContributor() {
 
+    }
+
+    private List<String> getMusicianHrefs(int numberOfMusicians) throws JsonProcessingException {
+        List<String> hrefs = new ArrayList<>();
+        for(int i=0; i<numberOfMusicians; i++) {
+            Musician musician = new Musician(null, "Dave", "Singer");
+            ResponseEntity<String> musicianResponse = restTemplate.postForEntity("/musicians", musician, String.class);
+            MusicianResponse musicianResponsePojo = objectMapper.readValue(musicianResponse.getBody(), MusicianResponse.class);
+            hrefs.add(musicianResponsePojo.get_links().getMusician().getHref());
+        }
+        return hrefs;
     }
 }
